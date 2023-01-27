@@ -8,6 +8,6 @@ typedef struct {
 } bbox_t;
 
 bbox_t make_bbox(double *x, double *y, const size_t n);
-size_t area(bbox_t *bbox);
+int bbox_area(bbox_t *bbox);
 
 #endif // BBOX_H_

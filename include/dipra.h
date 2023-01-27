@@ -2,7 +2,20 @@
 #define DIPRA_H_
 
 #include <stdlib.h>
+#include "bbox.h"
+#include "polygon.h"
 
-size_t dipra_render(double *x, double *y, double *alpha, const size_t n);
+typedef struct {
+    int *x;
+    int *y;
+    double *alpha;
+    size_t n;
+} render_t;
+
+render_t create_render(size_t n);
+void destroy_render(const render_t* render);
+
+bbox_t polygon_bbox(const polygon_t *polygon);
+size_t dipra_render(const polygon_t *polygon, const bbox_t *bbox, render_t *output);
 
 #endif // DIPRA_H_
