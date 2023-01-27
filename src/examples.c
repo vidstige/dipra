@@ -29,7 +29,6 @@ void draw(image_t *image, const render_t* render) {
         int x = render->x[i];
         int y = render->y[i];
         double alpha = render->alpha[i];
-        printf("%d %d", x, y);
         image->pixels[x + image->stride * y] = (uint8_t)(alpha * 255.0);
     }
 }
@@ -50,9 +49,9 @@ int main(int argc, const char* argv[]) {
     polygon.n = 3;
     polygon.x = malloc(polygon.n * sizeof(double));
     polygon.y = malloc(polygon.n * sizeof(double));
-    polygon.x[0] = 2.0; polygon.y[0] = 1.0;
-    polygon.x[1] = 4.0; polygon.y[1] = 3.0;
-    polygon.x[2] = 1.0; polygon.y[2] = 2.0;
+    polygon.x[0] = 4.0; polygon.y[0] = 1.0;
+    polygon.x[1] = 9.0; polygon.y[1] = 5.0;
+    polygon.x[2] = 2.0; polygon.y[2] = 8.0;
     bbox_t bbox = polygon_bbox(&polygon);
     render_t render = create_render(bbox_area(&bbox));
     dipra_render(&polygon, &bbox, &render);
