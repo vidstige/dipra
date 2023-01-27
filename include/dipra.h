@@ -10,12 +10,13 @@ typedef struct {
     int *y;
     double *alpha;
     size_t n;
+    size_t capacity;
 } render_t;
 
 render_t create_render(size_t n);
 void destroy_render(const render_t* render);
 
 bbox_t polygon_bbox(const polygon_t *polygon);
-size_t dipra_render(const polygon_t *polygon, const bbox_t *bbox, render_t *output);
+void dipra_render(const polygon_t *polygon, const bbox_t *bbox, render_t *output);
 
 #endif // DIPRA_H_
