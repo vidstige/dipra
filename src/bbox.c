@@ -19,8 +19,14 @@ bbox_t make_bbox(double *x, double *y, const size_t n) {
     return (bbox_t) {min_x, min_y, max_x, max_y};
 }
 
+int bbox_width(bbox_t *bbox) {
+    return bbox->x1 - bbox->x0;
+}
+
+int bbox_height(bbox_t *bbox) {
+    return bbox->y1 - bbox->y0;
+}
+
 int bbox_area(bbox_t *bbox) {
-    int width = bbox->x1 - bbox->x0;
-    int height = bbox->y1 - bbox->y0;
-    return width * height;
+    return bbox_width(bbox) * bbox_height(bbox);
 }
