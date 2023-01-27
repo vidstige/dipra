@@ -49,7 +49,7 @@ int main(int argc, const char* argv[]) {
     polygon.n = 3;
     polygon.x = malloc(polygon.n * sizeof(double));
     polygon.y = malloc(polygon.n * sizeof(double));
-    polygon.x[0] = 4.0; polygon.y[0] = 1.0;
+    polygon.x[0] = 0.0; polygon.y[0] = 0.0;
     polygon.x[1] = 9.0; polygon.y[1] = 5.0;
     polygon.x[2] = 2.0; polygon.y[2] = 8.0;
     bbox_t bbox = polygon_bbox(&polygon);
@@ -58,7 +58,9 @@ int main(int argc, const char* argv[]) {
     
     image_t image = create_image(bbox.x1, bbox.y1);
     draw(&image, &render);
-    write_pgm(stdout, &image);
+    FILE *f = fopen("0.pgm", "w");
+    write_pgm(f, &image);
+    fclose(f);
     destroy_image(&image);
     destroy_render(&render);
     return 0;
