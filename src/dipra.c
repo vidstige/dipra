@@ -98,7 +98,7 @@ static void render_add(render_t *render, double x, double y, double alpha) {
     render->x[render->n] = x;
     render->y[render->n] = y;
     render->alpha[render->n] = alpha;
-    render->n++;
+    if (render->n < render->capacity) render->n++;
 }
 
 void dipra_render(const polygon_t *polygon, const bbox_t *bbox, render_t *output) {
