@@ -1,29 +1,26 @@
 CC      := gcc
-BIN     := ./bin
-OBJ     := ./obj
-INCLUDE := ./include
-SRC     := ./src
-SRCS    := $(wildcard $(SRC)/*.c)
+OBJ     := obj/
+LIB     := lib/
+INCLUDE := include/
+SRC     := src/
+SRCS    := $(wildcard $(SRC)*.c)
 OBJS    := $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(SRCS))
-BINARY  := bin/examples
+LIBRARY := lib/libdipra.a
 CFLAGS  := -I$(INCLUDE)
 LDLIBS  := -lm
 
-.PHONY: all run clean
+.PHONY: all clean
 
-all: $(BINARY)
+all: $(LIBRARY)
 
-$(BINARY): $(OBJS)
-	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+$(LIBRARY): $(OBJS) | $(LIB)
+	ar rcs $@ $^
 
-$(OBJ)/%.o: $(SRC)/%.c | $(OBJ) $(BIN)
+$(OBJ)%.o: $(SRC)%.c | $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ) $(BIN):
+$(OBJ) $(LIB):
 	mkdir $@
 
-run: $(BINARY)
-	$<
-
 clean:
-	rm -r $(OBJ) $(BINARY)
+	rm -r $(OBJ) $(LIBRARY)
