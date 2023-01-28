@@ -4,17 +4,21 @@ LIB     := lib/
 INCLUDE := include/
 SRC     := src/
 SRCS    := $(wildcard $(SRC)*.c)
-OBJS    := $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(SRCS))
+OBJS    := $(patsubst $(SRC)%.c,$(OBJ)%.o,$(SRCS))
 LIBRARY := lib/libdipra.a
 CFLAGS  := -I$(INCLUDE)
 LDLIBS  := -lm
 
-.PHONY: all clean
+.PHONY: all examples clean
 
 all: $(LIBRARY)
 
+examples:
+	make -C examples
+
 $(LIBRARY): $(OBJS) | $(LIB)
 	ar rcs $@ $^
+#	ranlib $@
 
 $(OBJ)%.o: $(SRC)%.c | $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
