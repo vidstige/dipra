@@ -1,0 +1,4 @@
+/build/
+/*.cpython-*.so
+__pycache__/
+*.egg-info/
