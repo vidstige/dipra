@@ -57,7 +57,7 @@ int main(int argc, const char* argv[]) {
     
     image_t image = create_image(bbox.x1, bbox.y1);
     draw(&image, &raster);
-    FILE *f = fopen("0.pgm", "w");
+    FILE *f = fopen("images/0.pgm", "w");
     write_pgm(f, &image);
     fclose(f);
     destroy_image(&image);

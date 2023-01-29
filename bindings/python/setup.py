@@ -35,6 +35,7 @@ setup(
         'Programming Language :: Python :: 3.10',
     ],
     keywords='polygon, rasterizer, render, draw',
-    setup_requires=[],
-    tests_require=[]
+    extras_require={
+        'test': ['pytest', 'numpy', 'pillow'],
+    },
 )

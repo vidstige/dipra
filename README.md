@@ -21,9 +21,10 @@ To test the Python bindings, first create a virtual environment for your python 
     python3.10 -m venv venv/
     source venv/bin/activate
 
-Then install it 
+Then install it (together with the test dependencies) and run the test suite
 
-    pip install python/bindings
+    pip install bindings/python/[test]
+    pytest bindings/python/
 
 
 ## Author
