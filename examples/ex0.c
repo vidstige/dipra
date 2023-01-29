@@ -46,16 +46,14 @@ void write_pgm(FILE* file, image_t *image) {
 }
 
 int main(int argc, const char* argv[]) {
-    polygon_t polygon;
-    polygon.n = 3;
-    polygon.x = malloc(polygon.n * sizeof(double));
-    polygon.y = malloc(polygon.n * sizeof(double));
+    polygon_t polygon = create_polygon(3);
     polygon.x[0] = 0.0; polygon.y[0] = 0.0;
     polygon.x[1] = 9.0; polygon.y[1] = 5.0;
     polygon.x[2] = 2.0; polygon.y[2] = 8.0;
     bbox_t bbox = polygon_bbox(&polygon);
     render_t render = create_render(bbox_area(&bbox));
     dipra_render(&polygon, &bbox, &render);
+    destroy_polygon(&polygon);
     
     image_t image = create_image(bbox.x1, bbox.y1);
     draw(&image, &render);
