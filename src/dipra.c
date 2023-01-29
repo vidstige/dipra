@@ -6,9 +6,9 @@
 
 raster_t create_raster(size_t n) {
     raster_t raster;
-    raster.x = malloc(n * sizeof(raster.x));
-    raster.y = malloc(n * sizeof(raster.y));
-    raster.alpha = malloc(n * sizeof(raster.alpha));
+    raster.x = malloc(n * sizeof(int));
+    raster.y = malloc(n * sizeof(int));
+    raster.alpha = malloc(n * sizeof(double));
     raster.n = 0;
     raster.capacity = n;
     return raster;
