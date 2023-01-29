@@ -11,10 +11,13 @@ setup(
     package_data={'dipra': ['__init__.pyi', 'py.typed']},
     ext_modules=[
         Extension(
-            'dipra', ['dipramodule.c'],
+            'dipra', [
+                'dipramodule.c',
+                '../../src/dipra.c', '../../src/bbox.c', '../../src/polygon.c'],
             depends=[
-                'include/dipra/bbox.h', 'include/dipra/dipra.h', 'include/dipra/polygon.h',
-                'src/bbox.c', 'src/dipra.c'],
+                'include/dipra/dipra.h', 'include/dipra/bbox.h', 'include/dipra/polygon.h',
+                ],
+            include_dirs=['../../include'],
         )
     ],
     long_description=long_description,

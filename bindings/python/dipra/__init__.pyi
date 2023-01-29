@@ -1,0 +1,3 @@
+from typing import List, Optional, Tuple
+BoundingBox = Tuple[float, float, float, float]
+def rasterize(polygon: List[Tuple[float, float]], bbox: Optional[BoundingBox]=None) -> Tuple[List[int], List[int], List[float]]: ...
