@@ -1,7 +1,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "dipra.h"
+
+#include "dipra/dipra.h"
 
 typedef struct {
     uint8_t *pixels;

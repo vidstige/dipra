@@ -1,6 +1,6 @@
-#include "bbox.h"
 #include <limits.h>
 #include <math.h>
+#include "dipra/bbox.h"
 
 bbox_t make_bbox(double *x, double *y, const size_t n) {
     int min_x = INT_MAX, max_x = INT_MIN;

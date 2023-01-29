@@ -1,5 +1,6 @@
-#include "dipra.h"
 #include <math.h>
+#include "dipra/dipra.h"
+
 
 #define EPSILON 2.2204460492503131e-16
 

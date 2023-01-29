@@ -12,7 +12,9 @@ setup(
     ext_modules=[
         Extension(
             'dipra', ['dipramodule.c'],
-            depends=['include/bbox.h', 'include/dipra.h', 'include/polygon.h', 'src/bbox.c', 'src/dipra.c'],
+            depends=[
+                'include/dipra/bbox.h', 'include/dipra/dipra.h', 'include/dipra/polygon.h',
+                'src/bbox.c', 'src/dipra.c'],
         )
     ],
     long_description=long_description,
