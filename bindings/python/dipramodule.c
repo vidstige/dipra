@@ -64,7 +64,7 @@ py_dipra_render(PyObject *self, PyObject *args)
     PyObject *alphaList = array_to_list_d(render.alpha, render.n);
         
     destroy_render(&render);
-    return Py_BuildValue("OOO", xList, yList, alphaList);
+    return Py_BuildValue("NNN", xList, yList, alphaList);
 }
 
 static PyMethodDef dipra_methods[] = {
