@@ -11,12 +11,12 @@ typedef struct {
     double *alpha;
     size_t n;
     size_t capacity;
-} render_t;
+} raster_t;
 
-render_t create_render(size_t n);
-void destroy_render(const render_t* render);
+raster_t create_raster(size_t n);
+void destroy_raster(const raster_t* raster);
 
 bbox_t polygon_bbox(const polygon_t *polygon);
-void dipra_render(const polygon_t *polygon, const bbox_t *bbox, render_t *output);
+void dipra_rasterize(const polygon_t *polygon, const bbox_t *bbox, raster_t *output);
 
 #endif // DIPRA_H_

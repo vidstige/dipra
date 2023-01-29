@@ -25,11 +25,11 @@ void destroy_image(const image_t *image) {
     free(image->pixels);
 }
 
-void draw(image_t *image, const render_t* render) {
-    for (size_t i = 0; i < render->n; i++) {
-        int x = render->x[i];
-        int y = render->y[i];
-        double alpha = render->alpha[i];
+void draw(image_t *image, const raster_t* raster) {
+    for (size_t i = 0; i < raster->n; i++) {
+        int x = raster->x[i];
+        int y = raster->y[i];
+        double alpha = raster->alpha[i];
         image->pixels[x + image->stride * y] = (uint8_t)(alpha * 255.0);
     }
 }
@@ -51,16 +51,16 @@ int main(int argc, const char* argv[]) {
     polygon.x[1] = 9.0; polygon.y[1] = 5.0;
     polygon.x[2] = 2.0; polygon.y[2] = 8.0;
     bbox_t bbox = polygon_bbox(&polygon);
-    render_t render = create_render(bbox_area(&bbox));
-    dipra_render(&polygon, &bbox, &render);
+    raster_t raster = create_raster(bbox_area(&bbox));
+    dipra_rasterize(&polygon, &bbox, &raster);
     destroy_polygon(&polygon);
     
     image_t image = create_image(bbox.x1, bbox.y1);
-    draw(&image, &render);
+    draw(&image, &raster);
     FILE *f = fopen("0.pgm", "w");
     write_pgm(f, &image);
     fclose(f);
     destroy_image(&image);
-    destroy_render(&render);
+    destroy_raster(&raster);
     return 0;
 }

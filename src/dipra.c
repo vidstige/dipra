@@ -4,20 +4,20 @@
 
 #define EPSILON 2.2204460492503131e-16
 
-render_t create_render(size_t n) {
-    render_t render;
-    render.x = malloc(n * sizeof(render.x));
-    render.y = malloc(n * sizeof(render.y));
-    render.alpha = malloc(n * sizeof(render.alpha));
-    render.n = 0;
-    render.capacity = n;
-    return render;
+raster_t create_raster(size_t n) {
+    raster_t raster;
+    raster.x = malloc(n * sizeof(raster.x));
+    raster.y = malloc(n * sizeof(raster.y));
+    raster.alpha = malloc(n * sizeof(raster.alpha));
+    raster.n = 0;
+    raster.capacity = n;
+    return raster;
 }
 
-void destroy_render(const render_t* render) {
-    free(render->x);
-    free(render->y);
-    free(render->alpha);
+void destroy_raster(const raster_t* raster) {
+    free(raster->x);
+    free(raster->y);
+    free(raster->alpha);
 }
 
 bbox_t polygon_bbox(const polygon_t *polygon) {
@@ -95,21 +95,21 @@ static double sdf(const polygon_t *polygon, vec2 p) {
     return min_d;
 }
 
-static void render_add(render_t *render, double x, double y, double alpha) {
-    render->x[render->n] = x;
-    render->y[render->n] = y;
-    render->alpha[render->n] = alpha;
-    if (render->n < render->capacity) render->n++;
+static void raster_add(raster_t *raster, double x, double y, double alpha) {
+    raster->x[raster->n] = x;
+    raster->y[raster->n] = y;
+    raster->alpha[raster->n] = alpha;
+    if (raster->n < raster->capacity) raster->n++;
 }
 
-void dipra_render(const polygon_t *polygon, const bbox_t *bbox, render_t *output) {
+void dipra_rasterize(const polygon_t *polygon, const bbox_t *bbox, raster_t *output) {
     output->n = 0;
     for (int y = bbox->y0; y < bbox->y1; y++) {
         for (int x = bbox->x0; x < bbox->x1; x++) {
             vec2 p = {x, y};
             double alpha = clamp(0, 1, sdf(polygon, p));
             //double alpha = sdf(polygon, p) + 0.5;
-            render_add(output, x, y, alpha);
+            raster_add(output, x, y, alpha);
         }
     }
 }

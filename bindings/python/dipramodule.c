@@ -22,7 +22,7 @@ static PyObject* array_to_list_d(double* values, size_t n) {
 }
 
 static PyObject *
-py_dipra_render(PyObject *self, PyObject *args)
+py_dipra_rasterize(PyObject *self, PyObject *args)
 {
     PyObject *polygonObject, *bboxObject = NULL;
     if (!PyArg_ParseTuple(args, "O!|O", &PyList_Type, &polygonObject, &bboxObject)) {
@@ -54,21 +54,21 @@ py_dipra_render(PyObject *self, PyObject *args)
     }
     
     int area = bbox_area(&bbox);
-    render_t render = create_render(area);
-    dipra_render(&polygon, &bbox, &render);
+    raster_t raster = create_raster(area);
+    dipra_rasterize(&polygon, &bbox, &raster);
     destroy_polygon(&polygon);
 
     // convert to lists
-    PyObject *xList = array_to_list_i(render.x, render.n);
-    PyObject *yList = array_to_list_i(render.y, render.n);
-    PyObject *alphaList = array_to_list_d(render.alpha, render.n);
+    PyObject *xList = array_to_list_i(raster.x, raster.n);
+    PyObject *yList = array_to_list_i(raster.y, raster.n);
+    PyObject *alphaList = array_to_list_d(raster.alpha, raster.n);
         
-    destroy_render(&render);
+    destroy_raster(&raster);
     return Py_BuildValue("NNN", xList, yList, alphaList);
 }
 
 static PyMethodDef dipra_methods[] = {
-    {"rasterize", py_dipra_render, METH_VARARGS, "Rasterize a polygon"},
+    {"rasterize", py_dipra_rasterize, METH_VARARGS, "Rasterize a polygon"},
     {NULL, NULL, 0, NULL} // sentinel
 };
 
